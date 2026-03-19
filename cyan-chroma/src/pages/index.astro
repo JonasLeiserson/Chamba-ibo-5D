@@ -1,19 +1,20 @@
 ---
 import '../styles/global.css';
 import CategoriaCard from '../componentes/CategoriaCard.astro';
+import palabras from '../data/palabras.json';
 ---
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Impostor Word Generator | TP Frontend</title>
+    <title>Impostor Word Generator</title>
   </head>
   <body class="bg-slate-50 text-slate-900 font-sans">
     
     <header class="py-10 text-center">
       <h1 class="text-5xl font-black tracking-tight">Impostor <span class="text-blue-600">Word</span></h1>
-      <p class="mt-2 text-slate-500">Herramienta de diagnóstico - Programación Frontend</p>
+      <p class="mt-2 text-slate-500">chamba ibo</p>
     </header>
 
     <main class="max-w-2xl mx-auto px-4">
@@ -34,23 +35,66 @@ import CategoriaCard from '../componentes/CategoriaCard.astro';
         <div id="resultado-container" class="hidden mt-8 p-6 bg-slate-900 rounded-2xl text-center animate-in fade-in zoom-in duration-300">
           <p class="text-blue-400 text-xs font-bold uppercase mb-1">Palabra secreta:</p>
           <span id="palabra-display" class="text-3xl font-mono font-bold text-white tracking-widest"></span>
+          <p id="pista-api" class="text-xs text-blue-300 mt-4 italic border-t border-blue-800 pt-2 font-light"></p>
         </div>
       </section>
 
       <section class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mb-10">
         <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
           <h3 class="font-bold text-blue-800 mb-1">¿Cómo jugar?</h3>
-          <p class="text-blue-700">Elegí una categoría y generá la palabra. ¡No dejes que el impostor la vea!</p>
+          <p class="text-blue-700">Elegí una categoría y generá la palabra</p>
         </div>
         <div class="bg-slate-100 p-4 rounded-xl border border-slate-200">
           <h3 class="font-bold text-slate-800 mb-1">Info del Proyecto</h3>
-          <p class="text-slate-600">Desarrollado para la Actividad Diagnóstico con Astro y Tailwind CSS.</p>
+          <p class="text-slate-600">Desarrollado para la Actividad Diagnóstico de ibo con Astro</p>
         </div>
       </section>
     </main>
 
     <footer class="py-10 text-center text-slate-400 text-xs italic">
     </footer>
+
+
+  <script define:vars={{ palabras }}>
+  const btn = document.getElementById('btn-generar');
+  const display = document.getElementById('palabra-display');
+  const pistaDisplay = document.getElementById('pista-api');
+  const container = document.getElementById('resultado-container');
+
+  async function buscarPista(palabra) {
+    pistaDisplay.textContent = "Buscando pista en el diccionario...";
+    try {
+      const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${palabra}`);
+      const data = await response.json();
+
+      if (data[0]?.meanings[0]?.definitions[0]) {
+        const def = data[0].meanings[0].definitions[0].definition;
+        pistaDisplay.textContent = `Pista: ${def}`;
+      } else {
+        pistaDisplay.textContent = "Sin pista disponible.";
+      }
+    } catch (e) {
+      pistaDisplay.textContent = "Error al conectar con la API.";
+    }
+  }
+
+  btn.addEventListener('click', async () => {
+    const input = document.querySelector('input[name="cat"]:checked');
+    
+    if (input) {
+      const cat = input.value;
+      const lista = palabras[cat];
+      const random = lista[Math.floor(Math.random() * lista.length)];
+      
+      display.textContent = random.toUpperCase();
+      container.classList.remove('hidden');
+
+      await buscarPista(random);
+    } else {
+      alert("¡Seleccioná una categoría primero!");
+    }
+  });
+</script>
 
   </body>
 </html>

@@ -1,0 +1,20 @@
+{
+    "animales": [
+      "dog", "cat", "elephant", "shark", "lion", "snake", "giraffe", 
+      "penguin", "rabbit", "spider", "wolf", "monkey", "eagle", "whale"
+    ],
+    "comida": [
+      "pizza", "burger", "pasta", "sushi", "taco", "mango", "fries", 
+      "coffee", "water", "burrito", "chicken", "apple", "bread", "cheese", 
+      "chocolate", "steak", "salad", "sandwich"
+    ],
+    "paises": [
+      "argentina", "brazil", "japan", "italy", "france", "spain", "germany", 
+      "canada", "mexico", "china", "egypt", "india", "australia", "greece"
+    ],
+    "tecnologia": [
+      "computer", "robot", "internet", "coding", "pixel", "cyborg", 
+      "laptop", "screen", "battery", "database", "keyboard", "software", 
+      "camera", "satellite", "phone"
+    ]
+  }
