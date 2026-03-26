@@ -1,20 +1,22 @@
 {
-    "animales": [
-      "dog", "cat", "elephant", "shark", "lion", "snake", "giraffe", 
-      "penguin", "rabbit", "spider", "wolf", "monkey", "eagle", "whale"
-    ],
-    "comida": [
-      "pizza", "burger", "pasta", "sushi", "taco", "mango", "fries", 
-      "coffee", "water", "burrito", "chicken", "apple", "bread", "cheese", 
-      "chocolate", "steak", "salad", "sandwich"
-    ],
-    "paises": [
-      "argentina", "brazil", "japan", "italy", "france", "spain", "germany", 
-      "canada", "mexico", "china", "egypt", "india", "australia", "greece"
-    ],
-    "tecnologia": [
-      "computer", "robot", "internet", "coding", "pixel", "cyborg", 
-      "laptop", "screen", "battery", "database", "keyboard", "software", 
-      "camera", "satellite", "phone"
-    ]
-  }
+  "animales": [
+    "dog", "cat", "elephant", "shark", "lion", "snake", "giraffe", 
+    "penguin", "rabbit", "spider", "wolf", "monkey", "eagle", "whale",
+    "kangaroo", "dolphin", "tiger", "zebra", "octopus", "hamster"
+  ],
+  "comida": [
+    "pizza", "burger", "pasta", "sushi", "taco", "mango", "fries", 
+    "coffee", "water", "burrito", "chicken", "apple", "bread", "cheese", 
+    "chocolate", "steak", "salad", "sandwich", "pancakes", "lasagna", "omelette"
+  ],
+  "paises": [
+    "argentina", "brazil", "japan", "italy", "france", "spain", "germany", 
+    "canada", "mexico", "china", "egypt", "india", "australia", "greece",
+    "portugal", "sweden", "norway", "chile", "colombia", "thailand"
+  ],
+  "tecnologia": [
+    "computer", "robot", "internet", "coding", "pixel", "cyborg", 
+    "laptop", "screen", "battery", "database", "keyboard", "software", 
+    "camera", "satellite", "phone", "algorithm", "blockchain", "microchip"
+  ]
+}
