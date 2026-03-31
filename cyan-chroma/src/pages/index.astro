@@ -18,163 +18,94 @@ const categorias = Object.keys(palabras);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Impostor Word Generator</title>
-    <style is:global>
-      /* --- DISEÑO ANTI-IA (NEUBRUTALISM) --- */
-      :root {
-        --bg: #ffdf6b; /* Amarillo vibrante */
-        --card: #ffffff;
-        --text: #000000;
-        --accent: #2563eb;
-        --shadow: #000000;
-      }
-
-      .dark {
-        --bg: #0f172a;
-        --card: #1e293b;
-        --text: #ffffff;
-        --accent: #38bdf8;
-        --shadow: #000000;
-      }
-
-      body {
-        background-color: var(--bg);
-        color: var(--text);
-        font-family: 'Inter', system-ui, sans-serif;
-        transition: background-color 0.2s ease;
-      }
-
-      /* Botones con estilo "Sticker" */
-      .neo-btn {
-        background: var(--accent);
-        color: white;
-        border: 3px solid #000;
-        box-shadow: 4px 4px 0px #000;
-        transition: all 0.1s;
-        font-weight: 900;
-        text-transform: uppercase;
-      }
-
-      .neo-btn:active {
-        box-shadow: 0px 0px 0px #000;
-        transform: translate(4px, 4px);
-      }
-
-      .neo-card {
-        background: var(--card);
-        border: 3px solid #000;
-        box-shadow: 8px 8px 0px var(--shadow);
-      }
-
-      /* Blur mejorado */
-      .revelar-box #palabra-display {
-        filter: blur(30px);
-        opacity: 0;
-        transition: all 0.2s scale;
-      }
-
-      .revelar-box:active #palabra-display {
-        filter: blur(0px);
-        opacity: 1;
-        transform: scale(1.1);
-      }
-
-      .hidden { display: none !important; }
-
-      /* Animación de entrada */
-      @keyframes bounceIn {
-        0% { transform: scale(0.3); opacity: 0; }
-        50% { transform: scale(1.05); }
-        70% { transform: scale(0.9); }
-        100% { transform: scale(1); opacity: 1; }
-      }
-      .animate-game { animation: bounceIn 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
-    </style>
   </head>
-  <body class="p-4">
+  <body>
     
-    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 neo-card rounded-xl text-xl hover:rotate-12 transition-transform">
+    <button id="theme-toggle" class="theme-btn neo-card rounded-2xl text-2xl active:scale-90 transition-transform">
       🌙
     </button>
 
-    <header class="max-w-2xl mx-auto text-center py-10">
-      <h1 class="text-6xl font-black italic tracking-tighter uppercase mb-2" style="-webkit-text-stroke: 2px black;">
+    <header class="max-w-xl w-full text-center py-10">
+      <h1 class="text-6xl font-black italic tracking-tighter uppercase mb-2" style="-webkit-text-stroke: 1.5px black;">
         Impostor <span class="text-blue-600">Word</span>
       </h1>
-      <p class="font-bold underline decoration-blue-500 decoration-4 text-lg">chamba ibo</p>
+      <p class="font-bold underline decoration-blue-500 decoration-4 text-xl">chamba ibo</p>
     </header>
 
-    <main class="max-w-2xl mx-auto">
+    <main class="max-w-xl w-full">
       
-      <section id="setup-ui" class="neo-card p-8 rounded-none mb-10">
-        <h2 class="text-xl font-black mb-6 uppercase italic">1. Elegí Categoría</h2>
+      <section id="setup-ui" class="neo-card p-8 animate-game">
+        <h2 class="text-2xl font-black mb-8 uppercase italic border-b-4 border-black inline-block">1. Categoría</h2>
         
-        <div class="grid grid-cols-2 gap-4 mb-10">
+        <div class="grid grid-cols-2 gap-4 mb-12">
           {categorias.map((cat) => (
-            <label class="cursor-pointer group">
-              <input type="radio" name="cat" value={cat} class="hidden peer" />
-              <div class="neo-card p-4 text-center peer-checked:bg-blue-500 peer-checked:text-white transition-colors group-hover:-translate-y-1">
-                <span class="text-3xl block mb-2">{emojis[cat]}</span>
-                <span class="font-black uppercase text-sm">{cat}</span>
+            <label class="cursor-pointer relative">
+              <input type="radio" name="cat" value={cat} class="hidden cat-input" />
+              <div class="cat-design neo-card p-6 text-center">
+                <span class="text-4xl block mb-2">{emojis[cat]}</span>
+                <span class="font-black uppercase text-xs tracking-widest">{cat}</span>
               </div>
             </label>
           ))}
         </div>
 
-        <h2 class="text-xl font-black mb-4 uppercase italic">2. Cuánta gente?</h2>
+        <h2 class="text-2xl font-black mb-4 uppercase italic border-b-4 border-black inline-block">2. Jugadores</h2>
         <input type="number" id="input-jugadores" min="3" value="3" 
-          class="w-full p-4 neo-card rounded-none mb-8 text-4xl font-black text-center focus:outline-none" />
+          class="w-full p-6 neo-card mb-12 text-5xl font-black text-center focus:outline-none bg-white text-black" />
 
-        <button id="btn-iniciar" class="w-full p-6 neo-btn text-2xl">
-          ¡A repartir!
+        <button id="btn-iniciar" class="w-full p-6 neo-btn text-3xl italic">
+       Iniciar 
         </button>
       </section>
 
-      <section id="game-ui" class="hidden animate-game neo-card p-10 rounded-none bg-black text-white text-center">
-        <div id="jugador-badge" class="inline-block bg-yellow-400 text-black px-4 py-1 font-black uppercase mb-6 rotate-2">
+      <section id="game-ui" class="hidden animate-game neo-card p-8 bg-zinc-900 text-white text-center">
+        <div id="jugador-badge" class="inline-block bg-blue-500 text-white px-6 py-2 font-black uppercase mb-10 -rotate-1 border-2 border-white">
           Jugador 1
         </div>
         
-        <div class="revelar-box bg-zinc-800 p-20 border-4 border-white mb-8 cursor-pointer active:bg-zinc-700 transition-all">
-          <p class="text-xs font-bold mb-4 text-zinc-400 uppercase tracking-widest">Mantené apretado</p>
-          <span id="palabra-display" class="text-5xl font-black tracking-tighter block">---</span>
+        <div class="revelar-box bg-zinc-800 p-16 border-4 border-dashed border-zinc-600 mb-8 cursor-pointer active:border-blue-500 transition-all">
+          <p class="text-xs font-bold mb-4 text-zinc-500 uppercase tracking-widest">Mantené para revelar</p>
+          <span id="palabra-display" class="text-5xl font-black tracking-tighter block uppercase">---</span>
         </div>
 
-        <p id="pista-api" class="text-yellow-400 font-bold italic text-sm mb-6 min-h-[40px]"></p>
+        <div class="bg-zinc-800 p-4 border-2 border-zinc-700 mb-8 min-h-[60px] flex items-center justify-center">
+            <p id="pista-api" class="text-blue-400 font-bold italic text-sm"></p>
+        </div>
 
-        <button id="btn-siguiente" class="w-full p-5 neo-btn bg-white text-black hover:bg-zinc-200">
-          SIGUIENTE →
+        <button id="btn-siguiente" class="w-full p-6 neo-btn bg-white text-black hover:bg-zinc-100">
+          LISTO
         </button>
       </section>
 
-      <section id="final-ui" class="hidden animate-game neo-card p-12 bg-blue-600 text-white text-center rounded-none">
-        <h2 class="text-6xl font-black mb-6 uppercase italic">¡LISTO!</h2>
-        <p class="text-xl font-bold mb-10">Nadie diga nada. <br/> Empiecen a sospechar.</p>
-        <button onclick="location.reload()" class="w-full p-6 neo-btn bg-yellow-400 text-black">
-          REINICIAR
-        </button>
+      <section id="final-ui" class="hidden animate-game text-center">
+        <div class="neo-card p-10 bg-blue-600 text-white inline-block mx-auto max-w-sm">
+          <h2 class="text-5xl font-black mb-6 uppercase italic">¡LISTO!</h2>
+          <p class="text-lg font-bold mb-10 leading-tight">Roles asignados. <br/> El impostor está entre ustedes.</p>
+          <button onclick="location.reload()" class="w-full p-5 neo-btn bg-yellow-400 text-black text-xl">
+            REINICIAR
+          </button>
+        </div>
       </section>
 
     </main>
 
     <script define:vars={{ palabras }}>
-      // DARK MODE FIX
       const toggle = document.getElementById('theme-toggle');
       const html = document.documentElement;
 
-      toggle.addEventListener('click', () => {
-        html.classList.toggle('dark');
-        const isDark = html.classList.contains('dark');
+      const setTheme = (isDark) => {
+        html.classList.toggle('dark', isDark);
         toggle.textContent = isDark ? '☀️' : '🌙';
+      };
+
+      toggle.addEventListener('click', () => {
+        const isDark = html.classList.toggle('dark');
+        setTheme(isDark);
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
       });
 
-      // Cargar preferencia guardada
-      if (localStorage.getItem('theme') === 'dark') {
-        html.classList.add('dark');
-        toggle.textContent = '☀️';
-      }
+      if (localStorage.getItem('theme') === 'dark') setTheme(true);
 
-      // LÓGICA JUEGO
       const setup = document.getElementById('setup-ui');
       const game = document.getElementById('game-ui');
       const final = document.getElementById('final-ui');
@@ -197,13 +128,10 @@ const categorias = Object.keys(palabras);
 
       btnIniciar.addEventListener('click', () => {
         const cat = document.querySelector('input[name="cat"]:checked');
-        if (!cat) return alert("ELEGÍ CATEGORÍA!");
-        
+        if (!cat) return alert("¡CATEGORÍA!");
         estado.total = parseInt(document.getElementById('input-jugadores').value);
         estado.imp = Math.floor(Math.random() * estado.total) + 1;
-        const lista = palabras[cat.value];
-        estado.palabra = lista[Math.floor(Math.random() * lista.length)];
-
+        estado.palabra = palabras[cat.value][Math.floor(Math.random() * palabras[cat.value].length)];
         setup.classList.add('hidden');
         game.classList.remove('hidden');
         render();
@@ -212,10 +140,9 @@ const categorias = Object.keys(palabras);
       function render() {
         badge.textContent = `Jugador ${estado.actual}`;
         pistaTxt.textContent = "";
-        
         if (estado.actual === estado.imp) {
           display.textContent = "IMPOSTOR";
-          pistaTxt.textContent = "¡Mentí o morí!";
+          pistaTxt.textContent = "¡Mentí!";
         } else {
           display.textContent = estado.palabra.toUpperCase();
           getPista(estado.palabra);

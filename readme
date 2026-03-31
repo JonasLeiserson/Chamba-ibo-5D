@@ -1,0 +1,14 @@
+Para este proyecto use Astro para el maquetado y tailwind para el css
+js para el codigo
+vercel para el deploy
+dictionary api para las pistas 
+
+Bueno, como se puede ver que este proyecto es un generador de palabras para jugarl al impostor. Se elije una categoria y la cantidad de jugadores, donde cada uno ve su palabra y despues el siguiente jugador. 
+
+Para funcionar esto cree componentes de las categorias para poder reutilizarlas cuando añada mas categorias. 
+
+El juego lee el archivo palabras.json y genera una categoria por cada una es estas. 
+Se genera aleatoriamente el impostor entre los jugadores. 
+se lanza un fetch a dictionary api para generar la definicion de la palabra. 
+Se reinicia la pagina. 
+
