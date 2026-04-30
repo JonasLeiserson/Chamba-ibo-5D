@@ -11,6 +11,20 @@ const emojis = {
 };
 
 const categorias = Object.keys(palabras);
+
+import sql from './carga.js';
+
+let dbStatus = "Conectando...";
+try {
+  // Esta query simple verifica si la base de datos responde
+  const result = await sql`SELECT NOW()`; 
+  dbStatus = "Conexión exitosa: " + result[0].now;
+  console.log("✅ Neon conectado:", result[0].now);
+} catch (error) {
+  dbStatus = "Error de conexión";
+  console.error("❌ Error en Neon:", error);
+}
+
 ---
 
 <html lang="es">
@@ -21,6 +35,11 @@ const categorias = Object.keys(palabras);
   </head>
   <body>
     
+    <!-- Agregá esto temporalmente en tu HTML para verlo en pantalla -->
+<div class="fixed bottom-4 right-4 bg-black text-white p-2 text-xs neo-card">
+  Status DB: {dbStatus}
+</div>
+
     <button id="theme-toggle" class="theme-btn neo-card rounded-2xl text-2xl active:scale-90 transition-transform">
       🌙
     </button>
