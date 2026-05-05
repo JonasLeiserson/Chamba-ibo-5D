@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/vercel": "^10.0.6",
     "@neondatabase/serverless": "^1.1.0",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^6.0.4",
