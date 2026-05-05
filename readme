@@ -12,3 +12,8 @@ Se genera aleatoriamente el impostor entre los jugadores.
 se lanza un fetch a dictionary api para generar la definicion de la palabra. 
 Se reinicia la pagina. 
 
+npm i 
+npm i -g vercel
+vercel login
+vercel env pull .env.local
+npm run dev
